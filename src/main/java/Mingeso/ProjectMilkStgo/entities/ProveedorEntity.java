@@ -1,13 +1,13 @@
-package tingeso.mingeso.pep1.entities;
+package Mingeso.ProjectMilkStgo.entities;
 
-import com.sun.istack.NotNull;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.jetbrains.annotations.NotNull;
 
 @Entity
 @Table(name = "proveedores")
@@ -17,8 +17,8 @@ import javax.persistence.Table;
 public class ProveedorEntity {
     @Id
     @NotNull
-    private String codigo;
+    private String proveedor_id;
     private String nombre;
     private String categoria;
-    private String retencion;
+    private String afecto_retencion;
 }

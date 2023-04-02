@@ -2,23 +2,75 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>MilkStgo</title>
-        <link href="../css/style_main.css" rel="stylesheet" />
-        <script src="../Script/scripts_main.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                background-color: rgb(199, 199, 199);
+            }
+
+            .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                max-width: 1000px;
+                margin: auto;
+                padding: 300px;
+            }
+            .card {
+                background-color: rgb(255, 255, 255);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 10px;
+                padding: 10px;
+                width: 200px;
+                height: 200px;
+                border: 1px solid black;
+                border-radius: 50px;
+                transition: transform .5s ease;
+
+            }
+            .card img {
+                width: 50%;
+                height: 50%;
+                object-fit: cover;
+                margin-bottom: 10px;
+
+            }
+            .card h2 {
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+                margin: 0;
+                padding: 20px;
+            }
+
+            .card:hover {
+                transform: scale(1.3);
+            }
+        </style>
+        <script>
+            function navegar(lugar){
+                location.href=lugar;
+            }
+        </script>
     </head>
 
     <body>
         <div class="container">
             <div class="card">
-                <img id="excel" src="../Imagenes/excel.png" alt="Imagen 2" onclick="">
+                <img id="excel" th:src="@{/Imagenes//excel.png}" alt="Imagen 2" onclick="">
                 <h2>Agregar proveedor mediante excel</h2>
             </div>
             <div class="card">
-                <img id="grupo personas" src="../Imagenes/grupo-de-usuarios.png" alt="Imagen 1" onclick="">
+                <img id="grupo personas" th:src="@{/Imagenes/grupo-de-usuarios.png}" alt="Imagen 1" onclick="navegar('listado_proveedores')">
                 <h2>Listado de proveedores</h2>
             </div>
             <div class="card">
-                <img id="persona" src="../Imagenes/persona.png" alt="Imagen 3" onclick="navegar('agregar_persona.html')">
+                <img id="persona" th:src="@{/Imagenes/persona.png}" alt="Imagen 3" onclick="navegar('agregar_proveedor')">
                 <h2>Agregar proveedor manualmente</h2>
             </div>
         </div>
