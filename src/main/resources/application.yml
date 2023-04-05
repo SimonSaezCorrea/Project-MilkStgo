@@ -1,3 +1,5 @@
+
+
 server:
   port: 8090
 
@@ -16,4 +18,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/MilkStgo
     username: postgres
     password: Simon_789
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
 

@@ -5,53 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>MilkStgo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            body {
-                background-color: rgb(199, 199, 199);
-            }
-
-            .container {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-wrap: wrap;
-                max-width: 1000px;
-                margin: auto;
-                padding: 300px;
-            }
-            .card {
-                background-color: rgb(255, 255, 255);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin: 10px;
-                padding: 10px;
-                width: 200px;
-                height: 200px;
-                border: 1px solid black;
-                border-radius: 50px;
-                transition: transform .5s ease;
-
-            }
-            .card img {
-                width: 50%;
-                height: 50%;
-                object-fit: cover;
-                margin-bottom: 10px;
-
-            }
-            .card h2 {
-                font-size: 20px;
-                font-weight: bold;
-                text-align: center;
-                margin: 0;
-                padding: 20px;
-            }
-
-            .card:hover {
-                transform: scale(1.3);
-            }
-        </style>
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+              crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+        <link rel = "stylesheet" href= "../static/css/navbar.css" type="text/css" th:href="@{/css/navbar.css}">
+        <link rel = "stylesheet" href= "../static/css/main.css" type="text/css" th:href="@{/css/main.css}">
         <script>
             function navegar(lugar){
                 location.href=lugar;
@@ -60,17 +22,22 @@
     </head>
 
     <body>
+    <header class="header">
+        <div class="logo">
+            <h1>MilkStgo</h1>
+        </div>
+    </header>
         <div class="container">
-            <div class="card">
-                <img id="excel" th:src="@{/Imagenes//excel.png}" alt="Imagen 2" onclick="">
+            <div class="card" onclick="navegar('subir_excel')">
+                <img id="excel" th:src="@{/Imagenes//excel.png}" alt="Imagen 2">
                 <h2>Agregar proveedor mediante excel</h2>
             </div>
-            <div class="card">
-                <img id="grupo personas" th:src="@{/Imagenes/grupo-de-usuarios.png}" alt="Imagen 1" onclick="navegar('listado_proveedores')">
+            <div class="card" onclick="navegar('listado_proveedores')">
+                <img id="grupo personas" th:src="@{/Imagenes/grupo-de-usuarios.png}" alt="Imagen 1">
                 <h2>Listado de proveedores</h2>
             </div>
-            <div class="card">
-                <img id="persona" th:src="@{/Imagenes/persona.png}" alt="Imagen 3" onclick="navegar('agregar_proveedor')">
+            <div class="card" onclick="navegar('agregar_proveedor')">
+                <img id="persona" th:src="@{/Imagenes/persona.png}" alt="Imagen 3">
                 <h2>Agregar proveedor manualmente</h2>
             </div>
         </div>
