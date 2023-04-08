@@ -35,7 +35,8 @@ public class ProveedorController {
                                  @RequestParam("nombre") String nombre,
                                  @RequestParam("categoria") String categoria,
                                  @RequestParam("afecto_retencion") String afecto_retencion){
-        proveedorService.guardarProveedor(proveedor_id, nombre, categoria, afecto_retencion);
+        ProveedorEntity proveedor = new ProveedorEntity(proveedor_id, nombre, categoria, afecto_retencion);
+        proveedorService.guardarProveedor(proveedor);
         return "redirect:/agregar_proveedor";
     }
 }
