@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Controller
 @RequestMapping
@@ -21,23 +22,47 @@ public class AcopioLecheController {
     @Autowired
     private AcopioLecheService subirData;
 
-    @GetMapping("/fileUpload")
+    @GetMapping("/subir_excel")
     public String main() {
-        return "fileUpload";
+        return "subir_excel";
     }
 
-    @PostMapping("/fileUpload")
+    @PostMapping("/subir_excel")
     public String upload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-        subirData.guardarAcopioLeche(file);
-        redirectAttributes.addFlashAttribute("mensaje", "¡Archivo cargado correctamente!");
-        subirData.leerCSV("Acopio.csv");
-        return "redirect:/fileUpload";
+        System.out.println("File: " + file.getOriginalFilename());
+        if(!Objects.equals(file.getOriginalFilename(), "")){
+            subirData.guardarAcopioLeche(file);
+            redirectAttributes.addFlashAttribute("mensaje", "¡Archivo cargado correctamente!");
+            subirData.leerCSV(file.getOriginalFilename());
+        }
+        else{
+            redirectAttributes.addFlashAttribute("mensaje", "No se ha cargado algún archivo");
+        }
+        return "redirect:/subir_excel";
     }
 
-    @GetMapping("/fileInformation")
+    @GetMapping("/datos_excel")
     public String listar(Model model) {
-        ArrayList<AcopioLecheEntity> datas = subirData.ObtenerAcopioLeche();
-        model.addAttribute("datas", datas);
-        return "fileInformation";
+        ArrayList<AcopioLecheEntity> acopio_leche = subirData.ObtenerAcopioLeche();
+        model.addAttribute("acopio_leche", acopio_leche);
+        return "datos_excel";
+    }
+
+    @GetMapping("/agregar_acopioLeche")
+    public String AcopioLeche(){
+        return "agregar_acopioLeche";
+    }
+    @PostMapping("/agregar_acopioLeche")
+    public String nuevoAcopioLeche(@RequestParam("fecha") String fecha,
+                                 @RequestParam("turno") String turno,
+                                 @RequestParam("proveedor_id") String proveedor_id,
+                                 @RequestParam("kls_leche") String kls_leche){
+        AcopioLecheEntity acopioLeche = new AcopioLecheEntity();
+        acopioLeche.setFecha(fecha);
+        acopioLeche.setTurno(turno);
+        acopioLeche.setKls_leche(kls_leche);
+        acopioLeche.setProveedor_id(proveedor_id);
+        subirData.guardarAcopioLeche(acopioLeche);
+        return "redirect:/agregar_acopioLeche";
     }
 }

@@ -26,18 +26,21 @@
         <div class="logo">
             <h1>MilkStgo</h1>
         </div>
+        <nav>
+        </nav>
+        <a class="btn" href="/agregar_acopioLeche"><button>Agregar Acopio Leche</button></a>
     </header>
         <div class="container">
             <div class="card" onclick="navegar('subir_excel')">
-                <img id="excel" th:src="@{/Imagenes//excel.png}" alt="Imagen 2">
+                <img id="excel" th:src="@{/images//excel.png}" alt="Imagen 2">
                 <h2>Agregar proveedor mediante excel</h2>
             </div>
             <div class="card" onclick="navegar('listado_proveedores')">
-                <img id="grupo personas" th:src="@{/Imagenes/grupo-de-usuarios.png}" alt="Imagen 1">
+                <img id="grupo personas" th:src="@{/images/grupo-de-usuarios.png}" alt="Imagen 1">
                 <h2>Listado de proveedores</h2>
             </div>
             <div class="card" onclick="navegar('agregar_proveedor')">
-                <img id="persona" th:src="@{/Imagenes/persona.png}" alt="Imagen 3">
+                <img id="persona" th:src="@{/images/persona.png}" alt="Imagen 3">
                 <h2>Agregar proveedor manualmente</h2>
             </div>
         </div>

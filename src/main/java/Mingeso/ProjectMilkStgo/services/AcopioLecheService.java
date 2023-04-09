@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,15 +19,10 @@ import java.util.ArrayList;
 @Service
 public class AcopioLecheService {
     @Autowired
-    AcopioLecheRepository acopioLecheRepository;
+    private AcopioLecheRepository acopioLecheRepository;
     private final Logger logg = LoggerFactory.getLogger(AcopioLecheRepository.class);
 
-    public void guardarAcopioLeche(String fecha, String turno, Integer kls_leche, String proveedores_id){
-        AcopioLecheEntity acopioLeche = new AcopioLecheEntity();
-        acopioLeche.setFecha(fecha);
-        acopioLeche.setTurno(turno);
-        acopioLeche.setKls_leche(kls_leche);
-        acopioLeche.setProveedor_id(proveedores_id);
+    public void guardarAcopioLeche(AcopioLecheEntity acopioLeche){
         acopioLecheRepository.save(acopioLeche);
     }
     public String guardarAcopioLeche(MultipartFile file){
@@ -64,9 +58,14 @@ public class AcopioLecheService {
                 if (count == 1){
                     count = 0;
                 }
-                else{
+                else {
                     String[] listaDatos = bfRead.split(";");
-                    guardarAcopioLeche(listaDatos[0], listaDatos[1], Integer.valueOf(listaDatos[2]), listaDatos[3]);
+                    AcopioLecheEntity acopioLeche = new AcopioLecheEntity();
+                    acopioLeche.setFecha(listaDatos[0]);
+                    acopioLeche.setFecha(listaDatos[1]);
+                    acopioLeche.setKls_leche(listaDatos[3]);
+                    acopioLeche.setProveedor_id(listaDatos[2]);
+                    guardarAcopioLeche(acopioLeche);
                     temp = temp + "\n" + bfRead;
                 }
             }
@@ -88,9 +87,5 @@ public class AcopioLecheService {
     }
     public ArrayList<AcopioLecheEntity> ObtenerAcopioLeche(){
         return (ArrayList<AcopioLecheEntity>) acopioLecheRepository.findAll();
-    }
-
-    public void eliminarAcopioLeche(ArrayList<AcopioLecheEntity> AcopioLeche){
-        acopioLecheRepository.deleteAll(AcopioLeche);
     }
 }

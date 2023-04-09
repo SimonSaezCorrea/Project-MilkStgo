@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Agregar Proveedor</title>
+    <title>Agregar Acopio de Leche</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -21,20 +21,20 @@
         <h1>MilkStgo</h1>
     </div>
     <a class="btn-2" href="/"><button>Volver al menú principal</button></a>
-    <a class="btn-2" href="/listado_proveedores"><button>Lista proveedores</button></a>
 </header>
-        <form th:action="@{/agregar_proveedor}" method="POST">
-            <label for="proveedor_id">Código:</label>
-            <input type="text" id="proveedor_id" name="proveedor_id">
+        <form th:action="@{/agregar_acopioLeche}" method="POST">
+            <label for="fecha">Fecha:</label>
+            <input type="text"  id="fecha" name="fecha" >
 
-            <label for="nombre">Nombre Proveedor:</label>
-            <input type="text"  id="nombre" name="nombre" >
+            <label for="turno">Turno:</label>
+            <input type="text" id="turno" name="turno" >
 
-            <label for="categoria">Categoría:</label>
-            <input type="text" id="categoria" name="categoria" >
+            <label for="proveedor_id">ID proveedor:</label>
+            <input type="text" id="proveedor_id" name="proveedor_id" >
 
-            <label for="afecto_retencion">Afecto a Retención:</label>
-            <input type="text" id="afecto_retencion" name="afecto_retencion" >
+            <label for="kls_leche">Kilos de leche:</label>
+            <input type="text" id="kls_leche" name="kls_leche" >
+
             <input id="enviar" type="submit" value="Enviar">
         </form>
 </body>
