@@ -1,12 +1,13 @@
 package Mingeso.ProjectMilkStgo.services;
 
-import Mingeso.ProjectMilkStgo.entities.AcopioLecheEntity;
-import Mingeso.ProjectMilkStgo.repositories.AcopioLecheRepository;
+import Mingeso.ProjectMilkStgo.entities.GrasaSolidoTotalEntity;
+import Mingeso.ProjectMilkStgo.repositories.GrasaSolidoTotalRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,17 +16,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-
 @Service
-public class AcopioLecheService {
+public class GrasaSolidoTotalesService {
     @Autowired
-    private AcopioLecheRepository acopioLecheRepository;
-    private final Logger logg = LoggerFactory.getLogger(AcopioLecheRepository.class);
+    GrasaSolidoTotalRepository grasaSolidoTotalRepository;
+    private final Logger logg = LoggerFactory.getLogger(GrasaSolidoTotalRepository.class);
 
-    public void guardarAcopioLeche(AcopioLecheEntity acopioLeche){
-        acopioLecheRepository.save(acopioLeche);
+    public void guardarGrasaSolidoTotal(GrasaSolidoTotalEntity grasaSolidoTotalesEntity){
+        grasaSolidoTotalRepository.save(grasaSolidoTotalesEntity);
     }
-    public String guardarAcopioLeche(MultipartFile file){
+    public ArrayList<GrasaSolidoTotalEntity> obtenerGrasaSolidoTotal(){
+        return (ArrayList<GrasaSolidoTotalEntity>) grasaSolidoTotalRepository.findAll();
+    }
+
+    public String guardarGrasaSolidoTotal(MultipartFile file){
         String filename = file.getOriginalFilename();
         if(filename != null){
             if(!file.isEmpty()){
@@ -45,10 +49,9 @@ public class AcopioLecheService {
             return "No se pudo guardar el archivo";
         }
     }
-
     public void leerCSV(String direccion){
         BufferedReader bf = null;
-        acopioLecheRepository.deleteAll();
+        grasaSolidoTotalRepository.deleteAll();
         try {
             bf = new BufferedReader(new FileReader(direccion));
             String temp = "";
@@ -60,12 +63,11 @@ public class AcopioLecheService {
                 }
                 else {
                     String[] listaDatos = bfRead.split(";");
-                    AcopioLecheEntity acopioLeche = new AcopioLecheEntity();
-                    acopioLeche.setFecha(listaDatos[0]);
-                    acopioLeche.setTurno(listaDatos[1]);
-                    acopioLeche.setProveedor_id(listaDatos[2]);
-                    acopioLeche.setKls_leche(listaDatos[3]);
-                    guardarAcopioLeche(acopioLeche);
+                    GrasaSolidoTotalEntity grasaSolidoTotalesEntity = new GrasaSolidoTotalEntity();
+                    grasaSolidoTotalesEntity.setProveedor_id(listaDatos[0]);
+                    grasaSolidoTotalesEntity.setGrasa(listaDatos[1]);
+                    grasaSolidoTotalesEntity.setSolidoTotal(listaDatos[2]);
+                    guardarGrasaSolidoTotal(grasaSolidoTotalesEntity);
                     temp = temp + "\n" + bfRead;
                 }
             }
@@ -85,7 +87,5 @@ public class AcopioLecheService {
             }
         }
     }
-    public ArrayList<AcopioLecheEntity> ObtenerAcopioLeche(){
-        return (ArrayList<AcopioLecheEntity>) acopioLecheRepository.findAll();
-    }
+
 }

@@ -15,9 +15,6 @@
   <link rel = "stylesheet" href= "../static/css/subir_excel.css" type="text/css" th:href="@{/css/subir_excel.css}">
   <link rel = "stylesheet" href= "../static/css/navbar.css" type="text/css" th:href="@{/css/navbar.css}">
   <title>Cargar CSV</title>
-  <style>
-
-  </style>
 </head>
 <body>
 <header class="header">
@@ -27,12 +24,12 @@
   <nav>
   </nav>
   <a class="btn" href="/"><button>Volver al menú principal</button></a>
-  <a class="btn" href="/datos_excel"><button>Ver el último CSV cargado</button></a>
+  <a class="btn" href="/listado_grasaSolidoTotal"><button>Listado de Grasa y Solidos totales</button></a>
 </header>
 <div class = "f">
 <div class="container">
   <h1><b>Cargar el archivo de datos</b></h1>
-  <form th:action="@{/subir_excel}" method="POST" enctype="multipart/form-data">
+  <form th:action="@{/subir_grasaSolidoTotal}" method="POST" enctype="multipart/form-data">
     <br>
     <input type="file" class="form-control" name="file" accept = ".csv">
     <br>

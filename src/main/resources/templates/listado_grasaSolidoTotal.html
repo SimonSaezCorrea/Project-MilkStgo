@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang = "es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
+    <title>Informacion de Acopio.csv
+    </title>
     <meta charset="UTF-8">
-    <title>Listado de proveedores</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -21,25 +25,23 @@
     <nav>
     </nav>
     <a class="btn" href="/"><button>Volver al menú principal</button></a>
-    <a class="btn-2" href="/agregar_proveedor"><button>Ingresar nuevo Proveedor</button></a>
+    <a class="btn-2" href="/subir_grasaSolidoTotal"><button>Ingresar grasas y solidos totales en .CSV</button></a>
 </header>
 <div th:align = "center" class = "container my-2">
-    <h1><b> Listado de proveedores</b></h1>
+    <h1><b>Información de Grasa Y Solidos Totales</b></h1>
     <table th:border = "1" class = "content-table">
         <thead>
         <tr>
-            <th>Codigo</th>
-            <th>Nombre</th>
-            <th>Categoria</th>
-            <th>Afecto Retencion</th>
+            <th>Proveedor</th>
+            <th>Grasa</th>
+            <th>Solido Total</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="proveedores:${proveedores}">
-            <td th:text="${proveedores.proveedor_id}"></td>
-            <td th:text="${proveedores.nombre}"></td>
-            <td th:text="${proveedores.categoria}"></td>
-            <td th:text="${proveedores.afecto_retencion}"></td>
+        <tr th:each="grasaSolidoTotal:${grasaSolidoTotal}">
+            <td th:text="${grasaSolidoTotal.proveedor_id}"></td>
+            <td th:text="${grasaSolidoTotal.grasa}"></td>
+            <td th:text="${grasaSolidoTotal.solidoTotal}"></td>
         </tr>
         </tbody>
     </table>

@@ -22,12 +22,12 @@ public class AcopioLecheController {
     @Autowired
     private AcopioLecheService subirData;
 
-    @GetMapping("/subir_excel")
+    @GetMapping("/subir_acopioLeche")
     public String main() {
-        return "subir_excel";
+        return "subir_acopioLeche";
     }
 
-    @PostMapping("/subir_excel")
+    @PostMapping("/subir_acopioLeche")
     public String upload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
         System.out.println("File: " + file.getOriginalFilename());
         if(!Objects.equals(file.getOriginalFilename(), "")){
@@ -38,14 +38,14 @@ public class AcopioLecheController {
         else{
             redirectAttributes.addFlashAttribute("mensaje", "No se ha cargado algún archivo");
         }
-        return "redirect:/subir_excel";
+        return "redirect:/subir_acopioLeche";
     }
 
-    @GetMapping("/datos_excel")
+    @GetMapping("/listado_AcopioLeche")
     public String listar(Model model) {
         ArrayList<AcopioLecheEntity> acopio_leche = subirData.ObtenerAcopioLeche();
         model.addAttribute("acopio_leche", acopio_leche);
-        return "datos_excel";
+        return "listado_acopioLeche";
     }
 
     @GetMapping("/agregar_acopioLeche")
