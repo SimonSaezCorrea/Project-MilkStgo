@@ -1,6 +1,5 @@
 package Mingeso.ProjectMilkStgo.controllers;
 
-import Mingeso.ProjectMilkStgo.entities.AcopioLecheEntity;
 import Mingeso.ProjectMilkStgo.entities.GrasaSolidoTotalEntity;
 import Mingeso.ProjectMilkStgo.services.GrasaSolidoTotalesService;
 import org.springframework.beans.factory.annotation.Autowired;

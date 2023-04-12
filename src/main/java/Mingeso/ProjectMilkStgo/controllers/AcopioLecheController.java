@@ -57,11 +57,7 @@ public class AcopioLecheController {
                                  @RequestParam("turno") String turno,
                                  @RequestParam("proveedor_id") String proveedor_id,
                                  @RequestParam("kls_leche") String kls_leche){
-        AcopioLecheEntity acopioLeche = new AcopioLecheEntity();
-        acopioLeche.setFecha(fecha);
-        acopioLeche.setTurno(turno);
-        acopioLeche.setKls_leche(kls_leche);
-        acopioLeche.setProveedor_id(proveedor_id);
+        AcopioLecheEntity acopioLeche = new AcopioLecheEntity(fecha, turno, proveedor_id, kls_leche);
         subirData.guardarAcopioLeche(acopioLeche);
         return "redirect:/agregar_acopioLeche";
     }
