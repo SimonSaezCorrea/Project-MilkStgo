@@ -2,17 +2,10 @@ package Mingeso.ProjectMilkStgo.services;
 
 
 import Mingeso.ProjectMilkStgo.entities.AcopioLecheEntity;
-import Mingeso.ProjectMilkStgo.entities.ProveedorEntity;
 import Mingeso.ProjectMilkStgo.repositories.AcopioLecheRepository;
-import Mingeso.ProjectMilkStgo.repositories.ProveedorRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -34,7 +27,7 @@ public class AcopioLecheServiceTest {
         acopioLecheEntity.setProveedor_id("00009");
         acopioLecheService.guardarAcopioLeche(acopioLecheEntity);
 
-        assertNotNull(acopioLecheRepository.encontrarPorCodigo(acopioLecheEntity.getAcopio_leche_id()));
+        assertNotNull(acopioLecheRepository.encontrarPorID(acopioLecheEntity.getAcopio_leche_id()));
 
         acopioLecheRepository.deleteById(acopioLecheEntity.getAcopio_leche_id());
     }
