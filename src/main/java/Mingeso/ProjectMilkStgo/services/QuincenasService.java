@@ -179,7 +179,7 @@ public class QuincenasService {
         int sueldo = sueldoCategoria(listAcopioLecheEntitie, proveedorEntity) +
                 sueldoGrasa(listAcopioLecheEntitie, grasaSolidoTotalesEntity) +
                 sueldoSolido(listAcopioLecheEntitie, grasaSolidoTotalesEntity);
-        int bonificacion = sueldo * bonificacionFrecuencia(listAcopioLecheEntitie);
+        int bonificacion = (sueldo * bonificacionFrecuencia(listAcopioLecheEntitie))/100;
         return (sueldo + bonificacion);
     }
 
@@ -189,9 +189,9 @@ public class QuincenasService {
         int sueldoGrasa=sueldoGrasa(listAcopioLecheEntity, grasaSolidoTotalesEntity);
         int sueldoSolido=sueldoSolido(listAcopioLecheEntity, grasaSolidoTotalesEntity);
 
-        int descuentoLeche=sueldoLeche*descuentoVariacionLeche(listAcopioLecheEntity);
-        int descuentoGrasa=sueldoGrasa*descuentoVariacionGrasa(grasaSolidoTotalesEntity);
-        int descuentoSolido=sueldoSolido*descuentoVariacionSolidoTotal(grasaSolidoTotalesEntity);
+        int descuentoLeche=sueldoLeche*descuentoVariacionLeche(listAcopioLecheEntity)/100;
+        int descuentoGrasa=sueldoGrasa*descuentoVariacionGrasa(grasaSolidoTotalesEntity)/100;
+        int descuentoSolido=sueldoSolido*descuentoVariacionSolidoTotal(grasaSolidoTotalesEntity)/100;
 
         return descuentoLeche+descuentoGrasa+descuentoSolido;
     }

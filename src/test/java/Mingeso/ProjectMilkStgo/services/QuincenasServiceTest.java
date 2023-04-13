@@ -109,7 +109,7 @@ class QuincenasServiceTest {
         listAcopioLecheEntity.add(acopioLecheEntity1);
         listAcopioLecheEntity.add(acopioLecheEntity2);
         listAcopioLecheEntity.add(acopioLecheEntity3);
-        GrasaSolidoTotalEntity grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","15","40");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","15","40");
         int sueldo = quincenasService.sueldoGrasa(listAcopioLecheEntity, grasaSolidoTotalEntity);
         assertThat(sueldo).isEqualTo(3000);
     }
@@ -124,7 +124,7 @@ class QuincenasServiceTest {
         listAcopioLecheEntity.add(acopioLecheEntity1);
         listAcopioLecheEntity.add(acopioLecheEntity2);
         listAcopioLecheEntity.add(acopioLecheEntity3);
-        GrasaSolidoTotalEntity grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","35","40");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","35","40");
         int sueldo = quincenasService.sueldoGrasa(listAcopioLecheEntity, grasaSolidoTotalEntity);
         assertThat(sueldo).isEqualTo(8000);
     }
@@ -139,7 +139,7 @@ class QuincenasServiceTest {
         listAcopioLecheEntity.add(acopioLecheEntity1);
         listAcopioLecheEntity.add(acopioLecheEntity2);
         listAcopioLecheEntity.add(acopioLecheEntity3);
-        GrasaSolidoTotalEntity grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","65","40");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","65","40");
         int sueldo = quincenasService.sueldoGrasa(listAcopioLecheEntity, grasaSolidoTotalEntity);
         assertThat(sueldo).isEqualTo(12000);
     }
@@ -155,7 +155,7 @@ class QuincenasServiceTest {
         listAcopioLecheEntity.add(acopioLecheEntity1);
         listAcopioLecheEntity.add(acopioLecheEntity2);
         listAcopioLecheEntity.add(acopioLecheEntity3);
-        GrasaSolidoTotalEntity grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","65","5");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","65","5");
         int sueldo = quincenasService.sueldoSolido(listAcopioLecheEntity, grasaSolidoTotalEntity);
         assertThat(sueldo).isEqualTo(-13000);
     }
@@ -170,7 +170,7 @@ class QuincenasServiceTest {
         listAcopioLecheEntity.add(acopioLecheEntity1);
         listAcopioLecheEntity.add(acopioLecheEntity2);
         listAcopioLecheEntity.add(acopioLecheEntity3);
-        GrasaSolidoTotalEntity grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","65","15");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","65","15");
         int sueldo = quincenasService.sueldoSolido(listAcopioLecheEntity, grasaSolidoTotalEntity);
         assertThat(sueldo).isEqualTo(-9000);
     }
@@ -185,7 +185,7 @@ class QuincenasServiceTest {
         listAcopioLecheEntity.add(acopioLecheEntity1);
         listAcopioLecheEntity.add(acopioLecheEntity2);
         listAcopioLecheEntity.add(acopioLecheEntity3);
-        GrasaSolidoTotalEntity grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","65","25");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","65","25");
         int sueldo = quincenasService.sueldoSolido(listAcopioLecheEntity, grasaSolidoTotalEntity);
         assertThat(sueldo).isEqualTo(9500);
     }
@@ -200,7 +200,7 @@ class QuincenasServiceTest {
         listAcopioLecheEntity.add(acopioLecheEntity1);
         listAcopioLecheEntity.add(acopioLecheEntity2);
         listAcopioLecheEntity.add(acopioLecheEntity3);
-        GrasaSolidoTotalEntity grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","65","45");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","65","45");
         int sueldo = quincenasService.sueldoSolido(listAcopioLecheEntity, grasaSolidoTotalEntity);
         assertThat(sueldo).isEqualTo(15000);
     }
@@ -731,18 +731,145 @@ class QuincenasServiceTest {
     }
 
     @Test
-    void pagoAcopioLeche() {
+    void pagoAcopioLeche_conBonificacion() {
+        AcopioLecheEntity acopioLecheEntity = new AcopioLecheEntity("2023/03/17","T","00101","10");
+        AcopioLecheEntity acopioLecheEntity1 = new AcopioLecheEntity("2023/03/18","T","00101","20");
+        AcopioLecheEntity acopioLecheEntity2 = new AcopioLecheEntity("2023/03/19","T","00101","30");
+        AcopioLecheEntity acopioLecheEntity3 = new AcopioLecheEntity("2023/03/20","T","00101","40");
+        AcopioLecheEntity acopioLecheEntity4 = new AcopioLecheEntity("2023/03/21","T","00101","50");
+        AcopioLecheEntity acopioLecheEntity5 = new AcopioLecheEntity("2023/03/22","T","00101","60");
+        AcopioLecheEntity acopioLecheEntity6 = new AcopioLecheEntity("2023/03/23","T","00101","70");
+        AcopioLecheEntity acopioLecheEntity7 = new AcopioLecheEntity("2023/03/24","T","00101","80");
+        AcopioLecheEntity acopioLecheEntity8 = new AcopioLecheEntity("2023/03/25","T","00101","90");
+        AcopioLecheEntity acopioLecheEntity9 = new AcopioLecheEntity("2023/03/26","T","00101","100");
+        AcopioLecheEntity acopioLecheEntity10 = new AcopioLecheEntity("2023/03/27","T","00101","110");
+        listAcopioLecheEntity = new ArrayList<>();
+        listAcopioLecheEntity.add(acopioLecheEntity);
+        listAcopioLecheEntity.add(acopioLecheEntity1);
+        listAcopioLecheEntity.add(acopioLecheEntity2);
+        listAcopioLecheEntity.add(acopioLecheEntity3);
+        listAcopioLecheEntity.add(acopioLecheEntity4);
+        listAcopioLecheEntity.add(acopioLecheEntity5);
+        listAcopioLecheEntity.add(acopioLecheEntity6);
+        listAcopioLecheEntity.add(acopioLecheEntity7);
+        listAcopioLecheEntity.add(acopioLecheEntity8);
+        listAcopioLecheEntity.add(acopioLecheEntity9);
+        listAcopioLecheEntity.add(acopioLecheEntity10);
+        proveedorEntity = new ProveedorEntity("00101","Anonimo","A","Si");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","15","40");
+        int pago = quincenasService.pagoAcopioLeche(grasaSolidoTotalEntity, proveedorEntity, listAcopioLecheEntity);
+        assertThat(pago).isEqualTo(627264);
+    }
+    @Test
+    void pagoAcopioLeche_sinBonificacion() {
+        AcopioLecheEntity acopioLecheEntity = new AcopioLecheEntity("2023/03/17","T","00101","10");
+        AcopioLecheEntity acopioLecheEntity1 = new AcopioLecheEntity("2023/03/18","M","00101","20");
+        AcopioLecheEntity acopioLecheEntity2 = new AcopioLecheEntity("2023/03/19","M","00101","30");
+        AcopioLecheEntity acopioLecheEntity3 = new AcopioLecheEntity("2023/03/20","T","00101","40");
+        listAcopioLecheEntity = new ArrayList<>();
+        listAcopioLecheEntity.add(acopioLecheEntity);
+        listAcopioLecheEntity.add(acopioLecheEntity1);
+        listAcopioLecheEntity.add(acopioLecheEntity2);
+        listAcopioLecheEntity.add(acopioLecheEntity3);
+        proveedorEntity = new ProveedorEntity("00101","Anonimo","A","Si");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","15","40");
+        int pago = quincenasService.pagoAcopioLeche(grasaSolidoTotalEntity, proveedorEntity, listAcopioLecheEntity);
+        assertThat(pago).isEqualTo(88000);
     }
 
     @Test
     void descuentos() {
+        AcopioLecheEntity acopioLecheEntity = new AcopioLecheEntity("2023/03/17","T","00101","10");
+        AcopioLecheEntity acopioLecheEntity1 = new AcopioLecheEntity("2023/03/18","M","00101","20");
+        AcopioLecheEntity acopioLecheEntity2 = new AcopioLecheEntity("2023/03/19","M","00101","30");
+        AcopioLecheEntity acopioLecheEntity3 = new AcopioLecheEntity("2023/03/20","T","00101","40");
+        listAcopioLecheEntity = new ArrayList<>();
+        listAcopioLecheEntity.add(acopioLecheEntity);
+        listAcopioLecheEntity.add(acopioLecheEntity1);
+        listAcopioLecheEntity.add(acopioLecheEntity2);
+        listAcopioLecheEntity.add(acopioLecheEntity3);
+        proveedorEntity = new ProveedorEntity("00101","Anonimo","A","Si");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
+        quincenasEntity = new QuincenasEntity(124,37,22,"00101");
+        quincenasRepository.save(quincenasEntity);
+        int descuento = quincenasService.descuentos(listAcopioLecheEntity, grasaSolidoTotalEntity, proveedorEntity);
+        assertThat(descuento).isEqualTo(6500);
+
+        quincenasRepository.delete(quincenasEntity);
     }
 
     @Test
     void pagoTotal() {
+        AcopioLecheEntity acopioLecheEntity = new AcopioLecheEntity("2023/03/17","T","00101","10");
+        AcopioLecheEntity acopioLecheEntity1 = new AcopioLecheEntity("2023/03/18","M","00101","20");
+        AcopioLecheEntity acopioLecheEntity2 = new AcopioLecheEntity("2023/03/19","M","00101","30");
+        AcopioLecheEntity acopioLecheEntity3 = new AcopioLecheEntity("2023/03/20","T","00101","40");
+        listAcopioLecheEntity = new ArrayList<>();
+        listAcopioLecheEntity.add(acopioLecheEntity);
+        listAcopioLecheEntity.add(acopioLecheEntity1);
+        listAcopioLecheEntity.add(acopioLecheEntity2);
+        listAcopioLecheEntity.add(acopioLecheEntity3);
+        proveedorEntity = new ProveedorEntity("00101","Anonimo","A","Si");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
+        quincenasEntity = new QuincenasEntity(124,37,22,"00101");
+        quincenasRepository.save(quincenasEntity);
+        int pago = quincenasService.pagoAcopioLeche(grasaSolidoTotalEntity, proveedorEntity, listAcopioLecheEntity);
+        int descuento = quincenasService.descuentos(listAcopioLecheEntity, grasaSolidoTotalEntity, proveedorEntity);
+
+        int pagoTotal=pago-descuento;
+        assertThat(pagoTotal).isEqualTo(86500);
+
+        quincenasRepository.delete(quincenasEntity);
     }
 
     @Test
-    void pagoFinal() {
+    void pagoFinal_sinRetencion() {
+        AcopioLecheEntity acopioLecheEntity = new AcopioLecheEntity("2023/03/17","T","00101","10");
+        AcopioLecheEntity acopioLecheEntity1 = new AcopioLecheEntity("2023/03/18","M","00101","20");
+        AcopioLecheEntity acopioLecheEntity2 = new AcopioLecheEntity("2023/03/19","M","00101","30");
+        AcopioLecheEntity acopioLecheEntity3 = new AcopioLecheEntity("2023/03/20","T","00101","40");
+        listAcopioLecheEntity = new ArrayList<>();
+        listAcopioLecheEntity.add(acopioLecheEntity);
+        listAcopioLecheEntity.add(acopioLecheEntity1);
+        listAcopioLecheEntity.add(acopioLecheEntity2);
+        listAcopioLecheEntity.add(acopioLecheEntity3);
+        proveedorEntity = new ProveedorEntity("00101","Anonimo","A","Si");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
+        quincenasEntity = new QuincenasEntity(124,37,22,"00101");
+        quincenasRepository.save(quincenasEntity);
+        int pago = quincenasService.pagoAcopioLeche(grasaSolidoTotalEntity, proveedorEntity, listAcopioLecheEntity);
+        int descuento = quincenasService.descuentos(listAcopioLecheEntity, grasaSolidoTotalEntity, proveedorEntity);
+
+        int pagoTotal=pago-descuento;
+        int retencion = quincenasService.retencion(pagoTotal);
+        pagoTotal = pagoTotal - retencion;
+        assertThat(pagoTotal).isEqualTo(86500);
+
+        quincenasRepository.delete(quincenasEntity);
+    }
+    @Test
+    void pagoFinal_conRetencion() {
+        AcopioLecheEntity acopioLecheEntity = new AcopioLecheEntity("2023/03/17","T","00101","200");
+        AcopioLecheEntity acopioLecheEntity1 = new AcopioLecheEntity("2023/03/18","M","00101","200");
+        AcopioLecheEntity acopioLecheEntity2 = new AcopioLecheEntity("2023/03/19","M","00101","300");
+        AcopioLecheEntity acopioLecheEntity3 = new AcopioLecheEntity("2023/03/20","T","00101","400");
+        listAcopioLecheEntity = new ArrayList<>();
+        listAcopioLecheEntity.add(acopioLecheEntity);
+        listAcopioLecheEntity.add(acopioLecheEntity1);
+        listAcopioLecheEntity.add(acopioLecheEntity2);
+        listAcopioLecheEntity.add(acopioLecheEntity3);
+        proveedorEntity = new ProveedorEntity("00101","Anonimo","A","Si");
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
+        quincenasEntity = new QuincenasEntity(1080,37,22,"00101");
+        quincenasRepository.save(quincenasEntity);
+        int pago = quincenasService.pagoAcopioLeche(grasaSolidoTotalEntity, proveedorEntity, listAcopioLecheEntity);
+        int descuento = quincenasService.descuentos(listAcopioLecheEntity, grasaSolidoTotalEntity, proveedorEntity);
+
+        int pagoTotal=pago-descuento;
+        int retencion = quincenasService.retencion(pagoTotal);
+        pagoTotal = pagoTotal - retencion;
+        assertThat(pagoTotal).isEqualTo(874698);
+
+        quincenasRepository.delete(quincenasEntity);
     }
 }
