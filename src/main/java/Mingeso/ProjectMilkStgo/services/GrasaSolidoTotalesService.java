@@ -27,6 +27,9 @@ public class GrasaSolidoTotalesService {
     public ArrayList<GrasaSolidoTotalEntity> obtenerGrasaSolidoTotal(){
         return (ArrayList<GrasaSolidoTotalEntity>) grasaSolidoTotalRepository.findAll();
     }
+    public GrasaSolidoTotalEntity obtenerGrasaSolidoTotal(String proveedor_id){
+        return grasaSolidoTotalRepository.encontrarPorProveedor(proveedor_id);
+    }
 
     public String guardarGrasaSolidoTotal(MultipartFile file){
         if(file.getOriginalFilename() != null){

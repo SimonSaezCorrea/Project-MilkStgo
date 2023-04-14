@@ -78,7 +78,10 @@ public class AcopioLecheService {
             }
         }
     }
-    public ArrayList<AcopioLecheEntity> ObtenerAcopioLeche(){
+    public ArrayList<AcopioLecheEntity> obtenerAcopioLeche(){
         return (ArrayList<AcopioLecheEntity>) acopioLecheRepository.findAll();
+    }
+    public ArrayList<AcopioLecheEntity> obtenerAcopioLeche(String proveedor_id){
+        return (ArrayList<AcopioLecheEntity>) acopioLecheRepository.encontrarPorProveedor(proveedor_id);
     }
 }

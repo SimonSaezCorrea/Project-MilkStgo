@@ -29,7 +29,6 @@ public class AcopioLecheController {
 
     @PostMapping("/subir_acopioLeche")
     public String upload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-        System.out.println("File: " + file.getOriginalFilename());
         if(!Objects.equals(file.getOriginalFilename(), "")){
             subirData.guardarAcopioLeche(file);
             redirectAttributes.addFlashAttribute("mensaje", "¡Archivo cargado correctamente!");
@@ -43,7 +42,7 @@ public class AcopioLecheController {
 
     @GetMapping("/listado_AcopioLeche")
     public String listar(Model model) {
-        ArrayList<AcopioLecheEntity> acopio_leche = subirData.ObtenerAcopioLeche();
+        ArrayList<AcopioLecheEntity> acopio_leche = subirData.obtenerAcopioLeche();
         model.addAttribute("acopio_leche", acopio_leche);
         return "listado_acopioLeche";
     }

@@ -8,6 +8,7 @@ import Mingeso.ProjectMilkStgo.repositories.QuincenasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,6 +16,19 @@ public class QuincenasService {
 
     @Autowired
     private QuincenasRepository quincenasRepository;
+
+    public void guardarQuincena(QuincenasEntity quincenasEntity){
+        quincenasRepository.save(quincenasEntity);
+    }
+    public List<QuincenasEntity> obtenerQuincenas(String proveedor_id){
+        return quincenasRepository.encontrarTodos(proveedor_id);
+    }
+    public QuincenasEntity obtenerQuincena(String proveedor_id, String fecha){
+        return quincenasRepository.encontrarPorFechaYProveedor(proveedor_id, fecha);
+    }
+
+    //----------------------------------------------------------------------------------------------------
+
     public int sueldoCategoria(List<AcopioLecheEntity> listAcopioLecheEntity, ProveedorEntity proveedorEntity){
         int sumKls=0;
         for(AcopioLecheEntity acopioLecheEntity:listAcopioLecheEntity){
@@ -98,15 +112,18 @@ public class QuincenasService {
     //----------------------------------------------------------------------------------------------------
 
     public int descuentoVariacionLeche(List<AcopioLecheEntity> listAcopioLecheEntity){
-        QuincenasEntity quincenasEntity = quincenasRepository.encontrarUltimo();
+        QuincenasEntity quincenasEntity = quincenasRepository.encontrarUltimo(listAcopioLecheEntity.get(0).getProveedor_id());
+        if(quincenasEntity==null){
+            return 0;
+        }
         int suma = 0;
         for(AcopioLecheEntity acopioLecheEntity:listAcopioLecheEntity){
             suma += Integer.parseInt(acopioLecheEntity.getKls_leche());
         }
-        if(suma > quincenasEntity.getLeche()){
+        if(suma > quincenasEntity.getKlsLeche()){
             return 0;
         }
-        float variacion = ((float) suma /quincenasEntity.getLeche() - 1) * -100;
+        float variacion = ((float) suma /quincenasEntity.getKlsLeche() - 1) * -100;
 
         if(variacion < 9){
             return 0;
@@ -122,7 +139,10 @@ public class QuincenasService {
         }
     }
     public int descuentoVariacionGrasa(GrasaSolidoTotalEntity grasaSolidoTotalEntity){
-        QuincenasEntity quincenasEntity = quincenasRepository.encontrarUltimo();
+        QuincenasEntity quincenasEntity = quincenasRepository.encontrarUltimo(grasaSolidoTotalEntity.getProveedor_id());
+        if(quincenasEntity==null){
+            return 0;
+        }
         if(Integer.parseInt(grasaSolidoTotalEntity.getGrasa()) > quincenasEntity.getGrasa()){
             return 0;
         }
@@ -141,7 +161,10 @@ public class QuincenasService {
         }
     }
     public int descuentoVariacionSolidoTotal(GrasaSolidoTotalEntity grasaSolidoTotalEntity){
-        QuincenasEntity quincenasEntity = quincenasRepository.encontrarUltimo();
+        QuincenasEntity quincenasEntity = quincenasRepository.encontrarUltimo(grasaSolidoTotalEntity.getProveedor_id());
+        if(quincenasEntity==null){
+            return 0;
+        }
         if(Integer.parseInt(grasaSolidoTotalEntity.getSolidoTotal()) > quincenasEntity.getSolido()){
             return 0;
         }
@@ -176,9 +199,10 @@ public class QuincenasService {
 
     public int pagoAcopioLeche(GrasaSolidoTotalEntity grasaSolidoTotalesEntity, ProveedorEntity proveedorEntity,
                                 List<AcopioLecheEntity> listAcopioLecheEntitie){
-        int sueldo = sueldoCategoria(listAcopioLecheEntitie, proveedorEntity) +
-                sueldoGrasa(listAcopioLecheEntitie, grasaSolidoTotalesEntity) +
-                sueldoSolido(listAcopioLecheEntitie, grasaSolidoTotalesEntity);
+        int sueldoLeche=sueldoCategoria(listAcopioLecheEntitie, proveedorEntity);
+        int sueldoGrasa=sueldoGrasa(listAcopioLecheEntitie, grasaSolidoTotalesEntity);
+        int sueldoSolido=sueldoSolido(listAcopioLecheEntitie, grasaSolidoTotalesEntity);
+        int sueldo=sueldoLeche+sueldoGrasa+sueldoSolido;
         int bonificacion = (sueldo * bonificacionFrecuencia(listAcopioLecheEntitie))/100;
         return (sueldo + bonificacion);
     }

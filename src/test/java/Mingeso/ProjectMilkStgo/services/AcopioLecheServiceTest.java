@@ -34,7 +34,7 @@ public class AcopioLecheServiceTest {
 
     @Test
     void ObtenerAcopioLeche(){
-        assertNotNull(acopioLecheService.ObtenerAcopioLeche());
+        assertNotNull(acopioLecheService.obtenerAcopioLeche());
     }
 
 
