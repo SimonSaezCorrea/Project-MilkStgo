@@ -1,63 +1,3 @@
-*{
-    font-family: sans-serif;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-.content-table{
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    min-width: 400px;
-    border-radius: 5px 5px 0 0;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-.content-table thead tr{
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
-    font-weight: bold;
-}
-.content-table th,
-.content-table td{
-    padding: 12px 15px;
-}
-.content-table tbody tr{
-    border-bottom: 1px solid #dddddd;
-}
-.content-table tbody tr:nth-of-type(even){
-    background-color: #f3f3f3;
-}
-.content-table tbody tr:last-of-type{
-    border-bottom: 2px solid #009879;
-}
-.content-table tbody tr.active-row{
-    font-weight: bold;
-    color: #009879;
-}
-.header .btn button:hover{
-    background-color: #e2f1f8;
-    color: #ffbc0e;
-    transform: scale(1.1);
-}
-.header .btn-2 button {
-    margin-left: 20px;
-    font-weight: 700;
-    color: #1b3039;
-    padding: 9px 25px;
-    background: #eceff1;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
-.header .btn-2 button:hover{
-    background-color: #009879;
-    color: #ffbc0e;
-    transform: scale(1.1);
-}
-
 div input{
     weight: 100px
 }
@@ -78,4 +18,17 @@ div input{
 
 #calcular:hover, #buscar:hover{
     background-color: #009879 !important;
+}
+td button, td input {
+    background-color: #009879;
+    color: #eceff1;
+    font-weight: bold;
+    border-width: 2px;
+    border-color: #003D31;
+}
+
+td button:hover, td input:hover {
+    background-color: #00B279;
+    color: #ffbc0e;
+    transform: scale(1.1);
 }

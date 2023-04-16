@@ -16,6 +16,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="../static/css/navbar.css" type="text/css" th:href="@{/css/navbar.css}" />
         <link rel="stylesheet" href="../static/css/planilla_pago.css" type="text/css" th:href="@{/css/planilla_pago.css}" />
+        <link rel="stylesheet" href="../static/css/listas.css" type="text/css" th:href="@{/css/listas.css}"/>
     </head>
     <body>
         <header class="header">
@@ -27,31 +28,29 @@
         </header>
         <div th:align="center" class="container my-2">
             <h1><b>Información de Grasa Y Solidos Totales</b></h1>
-            <div>
-                <form th:action="@{/planilla_de_pagos}" method="POST">
-                    <input name="codigo" id="codigo" type="text" placeholder="ID Proveedor"/>
-                    <input id="calcular" class="btn btn-outline-primary" type="submit" value="Calcular Quincena" />
-                </form>
-                <form th:action="@{/planilla_de_pagos/{proveedor_id}(proveedor_id=${proveedor_id})}"  method="GET">
-                    <input name="proveedor_id" id="proveedor_id" type="text" placeholder="ID Proveedor"/>
-                    <input id="buscar" class="btn btn-outline-primary" type="submit" value="Buscar"/>
-                </form>
+            <form th:action="@{/planilla_de_pagos}" method="POST">
+                <input type="text" id="proveedor_id" name="proveedor_id" placeholder="Código proveedor">
+                <td><input type="submit" value="Calcular" /></td>
+            </form>
+            <u><b> <h2 th:text="${mensaje}"></h2></b></u>
+            <table th:border="1" class="content-table">
+                <thead>
+                <tr>
+                    <th>Código Proveedor</th>
+                    <th>Nombre Proveedor</th>
+                    <th>Última fecha</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody th:each="quincenasEntity:${quincenasEntityList}">
+                    <td id="proveedor_id2" name="proveedor_id" th:text="${quincenasEntity.proveedor_id}"></td>
+                    <td id="nombreProveedor" name="nombreProveedor" th:text="${quincenasEntity.nombreProveedor}"></td>
 
-                <form th:action="@{/planilla_de_pago/{proveedor_id}/{fecha}(proveedor_id=${proveedor_id}, fecha=${fecha})}" method="GET">
-                    <label for="fecha">Seleccione una fecha:</label>
-                    <select id="fecha" name="fecha">
-                        <option th:each="fecha : ${fechasList}"
-                                th:value="${fecha}"
-                                th:text="${fecha}">
-                        </option>
-                    </select>
-                    <button type="submit">Mostrar datos</button>
-                </form>
-
-
-                <u><b> <h2 th:text="${mensaje}"></h2></b></u>
-            </div>
-
+                    <td id="fecha" name="fecha" th:text="${quincenasEntity.fecha}"></td>
+                    <td><a href="/planilla_de_pagos"><button id="btn_quincena">Quincena</button></a></td>
+                </tbody>
+            </table>
         </div>
     </body>
 </html>
