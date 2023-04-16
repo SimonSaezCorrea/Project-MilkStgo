@@ -13,10 +13,46 @@
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="../static/css/navbar.css" type="text/css" th:href="@{/css/navbar.css}" />
-        <link rel="stylesheet" href="../static/css/planilla_pago.css" type="text/css" th:href="@{/css/planilla_pago.css}" />
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"/>
+        <link rel="stylesheet" href="../static/css/navbar.css" type="text/css" th:href="@{/css/navbar.css}"/>
         <link rel="stylesheet" href="../static/css/listas.css" type="text/css" th:href="@{/css/listas.css}"/>
+        <style>
+            ::placeholder{
+                color: #aeaeae;
+                font-weight: bold;
+                text-align: center;
+            }
+            #submit{
+                margin-left:5px;
+                width: 100px;
+                height: 30px;
+                background-color: #009879;
+                color: #eceff1;
+                font-weight: bold;
+                border-width: 2px;
+                border-style: solid;
+                border-color: #005C49;
+                border-radius: 50px;
+            }
+            #submit:hover{
+                background-color: #00B279;
+                color: #ffffff;
+                transform: scale(1.1);
+            }
+
+            tbody td a{
+                background-color: #009879 !important;
+                border-width: 2px !important;
+                border-style: solid !important;
+                border-color: #005C49 !important;
+                border-radius: 50px !important;
+            }
+            tbody td a:hover{
+                background-color: #00B279 !important;
+                color: #ffffff !important;
+                transform: scale(1.1) !important;
+            }
+        </style>
     </head>
     <body>
         <header class="header">
@@ -27,10 +63,10 @@
             <a class="btn" href="/"><button>Volver al menú principal</button></a>
         </header>
         <div th:align="center" class="container my-2">
-            <h1><b>Información de Grasa Y Solidos Totales</b></h1>
-            <form th:action="@{/planilla_de_pagos}" method="POST">
+            <h1><b>Planillas proveedores</b></h1>
+            <form th:action="@{/planillas_de_pagos}" method="POST">
                 <input type="text" id="proveedor_id" name="proveedor_id" placeholder="Código proveedor">
-                <td><input type="submit" value="Calcular" /></td>
+                <input id="submit" type="submit" value="Calcular" />
             </form>
             <u><b> <h2 th:text="${mensaje}"></h2></b></u>
             <table th:border="1" class="content-table">
@@ -40,15 +76,13 @@
                     <th>Nombre Proveedor</th>
                     <th>Última fecha</th>
                     <th></th>
-                    <th></th>
                 </tr>
                 </thead>
                 <tbody th:each="quincenasEntity:${quincenasEntityList}">
-                    <td id="proveedor_id2" name="proveedor_id" th:text="${quincenasEntity.proveedor_id}"></td>
+                    <td id="proveedor_id2" name="proveedor_id2" th:text="${quincenasEntity.proveedor_id}"></td>
                     <td id="nombreProveedor" name="nombreProveedor" th:text="${quincenasEntity.nombreProveedor}"></td>
-
                     <td id="fecha" name="fecha" th:text="${quincenasEntity.fecha}"></td>
-                    <td><a href="/planilla_de_pagos"><button id="btn_quincena">Quincena</button></a></td>
+                    <td><a class="btn btn-success" th:href="@{/planilla_de_pago(proveedor_id2=${quincenasEntity.proveedor_id}, fecha=${quincenasEntity.fecha})}">Quincena</a></td>
                 </tbody>
             </table>
         </div>

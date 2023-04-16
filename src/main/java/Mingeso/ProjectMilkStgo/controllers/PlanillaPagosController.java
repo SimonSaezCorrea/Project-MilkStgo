@@ -38,7 +38,7 @@ public class PlanillaPagosController {
     @Autowired
     private ProveedorRepository proveedoresRepository;
 
-    @GetMapping("/planilla_de_pagos")
+    @GetMapping("/planillas_de_pagos")
     public String main(Model model){
         List<ProveedorEntity> proveedorEntityList = proveedoresRepository.findAll();
         List<QuincenasEntity> quincenasEntityList = new ArrayList<>();
@@ -56,19 +56,18 @@ public class PlanillaPagosController {
             contador++;
         }
         model.addAttribute("quincenasEntityList", quincenasEntityList);
-        return "planilla_de_pagos";
+        return "planillas_de_pagos";
     }
 
-    @PostMapping("/planilla_de_pagos")
-    public String nuevaQuincena(@RequestParam("proveedor_id") String proveedor_id, RedirectAttributes redirectAttributes){
+    @PostMapping("/planillas_de_pagos")
+    public String nuevaQuincena(@RequestParam("proveedor_id") String proveedor_id,
+                                RedirectAttributes redirectAttributes){
         ProveedorEntity proveedorEntity = proveedorService.encontrarPorCodigo(proveedor_id);
         List<AcopioLecheEntity> acopioLecheEntityList = acopioLecheService.obtenerAcopioLeche(proveedor_id);
         System.out.println(acopioLecheEntityList);
         if(acopioLecheEntityList.isEmpty()){
             redirectAttributes.addFlashAttribute("mensaje", "No ha sido posible calcular");
-            System.out.println("es nulo");
         }else {
-            System.out.println("no es nulo");
             GrasaSolidoTotalEntity grasaSolidoTotalEntity = grasaSolidoTotalesService.obtenerGrasaSolidoTotal(proveedor_id);
             QuincenasEntity quincenasEntity = new QuincenasEntity();
             Calendar fecha = Calendar.getInstance();
@@ -101,7 +100,43 @@ public class PlanillaPagosController {
             quincenasService.guardarQuincena(quincenasEntity);
             redirectAttributes.addFlashAttribute("mensaje", "Se ha calculado correctamente");
         }
-        return "redirect:/planilla_de_pagos";
+        return "redirect:/planillas_de_pagos";
     }
-
+    @GetMapping("/planilla_de_pago")
+    public String verQuincena(@RequestParam("proveedor_id2") String proveedor_id,
+                              @RequestParam("fecha") String fecha,
+                              Model model,
+                              RedirectAttributes redirectAttributes){
+        QuincenasEntity quincenasEntity;
+        if(fecha.equals("-")){
+            quincenasEntity = new QuincenasEntity();
+            quincenasEntity.setFecha("-");
+            quincenasEntity.setProveedor_id("");
+            quincenasEntity.setNombreProveedor("");
+            quincenasEntity.setKlsLeche(0);
+            quincenasEntity.setNumeroDiasLeche(0);
+            quincenasEntity.setPromedioKlsLeche(0);
+            quincenasEntity.setVariacionLeche(0);
+            quincenasEntity.setGrasa(0);
+            quincenasEntity.setVariacionGrasa(0);
+            quincenasEntity.setSolido(0);
+            quincenasEntity.setVariacionSolido(0);
+            quincenasEntity.setPagoLeche(0);
+            quincenasEntity.setPagoGrasa(0);
+            quincenasEntity.setPagoSolido(0);
+            quincenasEntity.setBonificacion(0);
+            quincenasEntity.setDescuentoLeche(0);
+            quincenasEntity.setDescuentoGrasa(0);
+            quincenasEntity.setDescuentoSolido(0);
+            quincenasEntity.setPagoTotal(0);
+            quincenasEntity.setRetencion(0);
+            quincenasEntity.setMontoFinal(0);
+            redirectAttributes.addFlashAttribute("mensaje", ("No existe quincena de proveedor" + proveedor_id));
+        }else {
+            quincenasEntity = quincenasRepository.encontrarPorFechaYProveedor(proveedor_id, fecha);
+            redirectAttributes.addFlashAttribute("mensaje", "Si");
+        }
+        model.addAttribute("quincenasEntity", quincenasEntity);
+        return "planilla_de_pago";
+    }
 }

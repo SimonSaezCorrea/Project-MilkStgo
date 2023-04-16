@@ -19,8 +19,7 @@
     text-align: left;
     font-weight: bold;
 }
-.content-table th,
-.content-table td{
+.content-table th, .content-table td{
     padding: 12px 15px;
 }
 .content-table tbody tr{

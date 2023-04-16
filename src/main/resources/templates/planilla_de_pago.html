@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Planilla de pagos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/css/navbar.css" type="text/css" th:href="@{/css/navbar.css}" />
+    <link rel="stylesheet" href="../static/css/listas.css" type="text/css" th:href="@{/css/listas.css}"/>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>MilkStgo</h1>
+        </div>
+        <nav></nav>
+        <a class="btn" href="/"><button>Volver al menú principal</button></a>
+        <a class="btn" href="/planillas_de_pagos"><button>Volver al listado de proveedores</button></a>
+    </header>
+    <div th:align="center">
+        <h1><b> Listado de proveedores</b></h1>
+        <table th:border="1" class="content-table">
+            <thead>
+                <tr>
+                    <th>Código Proveedor</th>
+                    <th>Nombre Proveedor</th>
+                    <th>Última fecha</th>
+                    <th>Bonificación</th>
+                    <th>Pago Total</th>
+                    <th>Retención</th>
+                    <th>Monto Final</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td th:text="${quincenasEntity.proveedor_id}"></td>
+                <td th:text="${quincenasEntity.nombreProveedor}"></td>
+                <td th:text="${quincenasEntity.fecha}"></td>
+                <td th:text="${quincenasEntity.bonificacion}"></td>
+                <td th:text="${quincenasEntity.pagoTotal}"></td>
+                <td th:text="${quincenasEntity.retencion}"></td>
+                <td th:text="${quincenasEntity.montoFinal}"></td>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>Kls de Leche</th>
+                    <th>Número de días consecutivos</th>
+                    <th>Promedio de Kls de Leche</th>
+                    <th>Variación de Leche</th>
+                    <th>Pagro de Leche</th>
+                    <th>Descuento de Leche</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <td th:text="${quincenasEntity.klsLeche}"></td>
+                <td th:text="${quincenasEntity.numeroDiasLeche}"></td>
+                <td th:text="${quincenasEntity.promedioKlsLeche}"></td>
+                <td th:text="${quincenasEntity.variacionLeche}"></td>
+                <td th:text="${quincenasEntity.pagoLeche}"></td>
+                <td th:text="${quincenasEntity.descuentoLeche}"></td>
+            </tbody>
+
+            <thead>
+            <tr>
+                <th>Porcentaje Grasa</th>
+                <th>Variación de Grasa</th>
+                <th>Pagro de Grasa</th>
+                <th>Descuento de Grasa</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                <td th:text="${quincenasEntity.grasa}"></td>
+                <td th:text="${quincenasEntity.variacionGrasa}"></td>
+                <td th:text="${quincenasEntity.pagoGrasa}"></td>
+                <td th:text="${quincenasEntity.fecha}"></td>
+            </tbody>
+
+            <thead>
+            <tr>
+                <th>Porcentaje Grasa</th>
+                <th>Variación de Grasa</th>
+                <th>Pago de Solido</th>
+                <th>Descuento de Solido</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody th:object="${quincenasEntity}">
+                <td th:text="${quincenasEntity.solido}"></td>
+                <td th:text="${quincenasEntity.variacionSolido}"></td>
+                <td th:text="${quincenasEntity.pagoSolido}"></td>
+                <td th:text="${quincenasEntity.descuentoSolido}"></td>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
