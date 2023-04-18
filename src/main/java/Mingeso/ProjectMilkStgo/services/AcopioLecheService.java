@@ -25,23 +25,6 @@ public class AcopioLecheService {
     public void guardarAcopioLeche(AcopioLecheEntity acopioLeche){
         acopioLecheRepository.save(acopioLeche);
     }
-    public String guardarAcopioLeche(MultipartFile file){
-        if(file.getOriginalFilename() != null){
-            if(!file.isEmpty()){
-                try{
-                    Files.write(Paths.get(file.getOriginalFilename()), file.getBytes());
-                    logg.info("Archivo guardado");
-                }
-                catch (IOException e){
-                    logg.error("Error", e);
-                }
-            }
-            return "Archivo guardado con exito!";
-        }
-        else{
-            return "No se pudo guardar el archivo";
-        }
-    }
 
     public void leerCSV(String direccion){
         BufferedReader bf = null;

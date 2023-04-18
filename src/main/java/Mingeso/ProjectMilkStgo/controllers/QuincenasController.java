@@ -23,7 +23,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping
-public class PlanillaPagosController {
+public class QuincenasController {
 
     @Autowired
     private AcopioLecheService acopioLecheService;
@@ -97,7 +97,7 @@ public class PlanillaPagosController {
             quincenasEntity.setPagoTotal(quincenasService.pagoAcopioLeche(grasaSolidoTotalEntity, proveedorEntity, acopioLecheEntityList));
             quincenasEntity.setRetencion(quincenasService.retencion(quincenasEntity.getPagoTotal()));
             quincenasEntity.setMontoFinal(quincenasService.pagoFinal(grasaSolidoTotalEntity, proveedorEntity, acopioLecheEntityList));
-            quincenasService.guardarQuincena(quincenasEntity);
+            quincenasService.guardarQuincenas(quincenasEntity);
             redirectAttributes.addFlashAttribute("mensaje", "Se ha calculado correctamente");
         }
         return "redirect:/planillas_de_pagos";

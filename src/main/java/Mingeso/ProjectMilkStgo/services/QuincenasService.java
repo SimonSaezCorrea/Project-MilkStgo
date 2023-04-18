@@ -17,14 +17,8 @@ public class QuincenasService {
     @Autowired
     private QuincenasRepository quincenasRepository;
 
-    public void guardarQuincena(QuincenasEntity quincenasEntity){
+    public void guardarQuincenas(QuincenasEntity quincenasEntity){
         quincenasRepository.save(quincenasEntity);
-    }
-    public List<QuincenasEntity> obtenerQuincenas(String proveedor_id){
-        return quincenasRepository.encontrarTodos(proveedor_id);
-    }
-    public QuincenasEntity obtenerQuincena(String proveedor_id, String fecha){
-        return quincenasRepository.encontrarPorFechaYProveedor(proveedor_id, fecha);
     }
 
     //----------------------------------------------------------------------------------------------------
@@ -169,7 +163,6 @@ public class QuincenasService {
             return 0;
         }
         float variacion = ((float) Integer.parseInt(grasaSolidoTotalEntity.getSolidoTotal()) /quincenasEntity.getSolido() - 1) * -100;
-        System.out.println("variacion: "+variacion);
         if(variacion < 6){
             return 0;
         }
@@ -197,8 +190,7 @@ public class QuincenasService {
 
     //----------------------------------------------------------------------------------------------------
 
-    public int pagoAcopioLeche(GrasaSolidoTotalEntity grasaSolidoTotalesEntity, ProveedorEntity proveedorEntity,
-                                List<AcopioLecheEntity> listAcopioLecheEntitie){
+    public int pagoAcopioLeche(GrasaSolidoTotalEntity grasaSolidoTotalesEntity, ProveedorEntity proveedorEntity, List<AcopioLecheEntity> listAcopioLecheEntitie){
         int sueldoLeche=sueldoCategoria(listAcopioLecheEntitie, proveedorEntity);
         int sueldoGrasa=sueldoGrasa(listAcopioLecheEntitie, grasaSolidoTotalesEntity);
         int sueldoSolido=sueldoSolido(listAcopioLecheEntitie, grasaSolidoTotalesEntity);
@@ -207,29 +199,26 @@ public class QuincenasService {
         return (sueldo + bonificacion);
     }
 
-    public int descuentos(List<AcopioLecheEntity> listAcopioLecheEntity, GrasaSolidoTotalEntity grasaSolidoTotalesEntity,
-                           ProveedorEntity proveedorEntity){
+    public int descuentos(List<AcopioLecheEntity> listAcopioLecheEntity, GrasaSolidoTotalEntity grasaSolidoTotalesEntity, ProveedorEntity proveedorEntity){
         int sueldoLeche=sueldoCategoria(listAcopioLecheEntity, proveedorEntity);
         int sueldoGrasa=sueldoGrasa(listAcopioLecheEntity, grasaSolidoTotalesEntity);
         int sueldoSolido=sueldoSolido(listAcopioLecheEntity, grasaSolidoTotalesEntity);
-
         int descuentoLeche=sueldoLeche*descuentoVariacionLeche(listAcopioLecheEntity)/100;
         int descuentoGrasa=sueldoGrasa*descuentoVariacionGrasa(grasaSolidoTotalesEntity)/100;
         int descuentoSolido=sueldoSolido*descuentoVariacionSolidoTotal(grasaSolidoTotalesEntity)/100;
-
         return descuentoLeche+descuentoGrasa+descuentoSolido;
     }
 
-    public int pagoTotal(GrasaSolidoTotalEntity grasaSolidoTotalesEntity, ProveedorEntity proveedorEntity,
-                          List<AcopioLecheEntity> listAcopioLecheEntitie){
+    public int pagoTotal(GrasaSolidoTotalEntity grasaSolidoTotalesEntity, ProveedorEntity proveedorEntity, List<AcopioLecheEntity> listAcopioLecheEntitie){
         int pago = pagoAcopioLeche(grasaSolidoTotalesEntity, proveedorEntity, listAcopioLecheEntitie);
-        int descuento = pago * descuentos(listAcopioLecheEntitie, grasaSolidoTotalesEntity, proveedorEntity);
+        int descuento = descuentos(listAcopioLecheEntitie, grasaSolidoTotalesEntity, proveedorEntity);
         return (pago - descuento);
     }
 
     //----------------------------------------------------------------------------------------------------
 
-    public int pagoFinal(GrasaSolidoTotalEntity grasaSolidoTotalesEntity, ProveedorEntity proveedorEntity,
+    public int pagoFinal(GrasaSolidoTotalEntity grasaSolidoTotalesEntity,
+                         ProveedorEntity proveedorEntity,
                          List<AcopioLecheEntity> ListAcopioLecheEntiti){
         int pago = pagoTotal(grasaSolidoTotalesEntity, proveedorEntity, ListAcopioLecheEntiti);
         int retencion = retencion(pago);

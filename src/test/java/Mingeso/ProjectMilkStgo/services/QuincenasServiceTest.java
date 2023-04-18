@@ -11,10 +11,8 @@ import Mingeso.ProjectMilkStgo.repositories.QuincenasRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,6 +34,36 @@ class QuincenasServiceTest {
     private ProveedorEntity proveedorEntity;
     private QuincenasEntity quincenasEntity;
     private GrasaSolidoTotalEntity grasaSolidoTotalEntity;
+
+
+    @Test
+    void guardarQuincenas(){
+        quincenasEntity = new QuincenasEntity();
+        quincenasEntity.setFecha("2022/3/12");
+        quincenasEntity.setProveedor_id("00101");
+        quincenasEntity.setNombreProveedor("anonimato");
+        quincenasEntity.setKlsLeche(0);
+        quincenasEntity.setNumeroDiasLeche(0);
+        quincenasEntity.setPromedioKlsLeche(0);
+        quincenasEntity.setVariacionLeche(0);
+        quincenasEntity.setGrasa(0);
+        quincenasEntity.setVariacionGrasa(0);
+        quincenasEntity.setSolido(0);
+        quincenasEntity.setVariacionSolido(0);
+        quincenasEntity.setPagoLeche(0);
+        quincenasEntity.setPagoGrasa(0);
+        quincenasEntity.setPagoSolido(0);
+        quincenasEntity.setBonificacion(0);
+        quincenasEntity.setDescuentoLeche(0);
+        quincenasEntity.setDescuentoGrasa(0);
+        quincenasEntity.setDescuentoSolido(0);
+        quincenasEntity.setPagoTotal(0);
+        quincenasEntity.setRetencion(0);
+        quincenasEntity.setMontoFinal(0);
+        quincenasService.guardarQuincenas(quincenasEntity);
+        assertNotNull(quincenasRepository.encontrarPorFechaYProveedor("00101", "2022/3/12"));
+        quincenasRepository.delete(quincenasEntity);
+    }
 
     @Test
     void sueldoCategoria_categoriaA() {
@@ -96,6 +124,21 @@ class QuincenasServiceTest {
         proveedorEntity = new ProveedorEntity("00101","Anonimo","D","Si");
         int sueldo = quincenasService.sueldoCategoria(listAcopioLecheEntity, proveedorEntity);
         assertThat(sueldo).isEqualTo(25000);
+    }
+    @Test
+    void sueldoCategoria_categoriaOtro() {
+        AcopioLecheEntity acopioLecheEntity = new AcopioLecheEntity("2023/03/17","T","00101","10");
+        AcopioLecheEntity acopioLecheEntity1 = new AcopioLecheEntity("2023/03/18","M","00101","20");
+        AcopioLecheEntity acopioLecheEntity2 = new AcopioLecheEntity("2023/03/19","M","00101","30");
+        AcopioLecheEntity acopioLecheEntity3 = new AcopioLecheEntity("2023/03/20","T","00101","40");
+        listAcopioLecheEntity = new ArrayList<>();
+        listAcopioLecheEntity.add(acopioLecheEntity);
+        listAcopioLecheEntity.add(acopioLecheEntity1);
+        listAcopioLecheEntity.add(acopioLecheEntity2);
+        listAcopioLecheEntity.add(acopioLecheEntity3);
+        proveedorEntity = new ProveedorEntity("00101","Anonimo","M","Si");
+        int sueldo = quincenasService.sueldoCategoria(listAcopioLecheEntity, proveedorEntity);
+        assertThat(sueldo).isEqualTo(0);
     }
 
     @Test
@@ -535,6 +578,20 @@ class QuincenasServiceTest {
     }
 
     @Test
+    void descuentoVariacionLeche_noExiste() {
+        AcopioLecheEntity acopioLecheEntity = new AcopioLecheEntity("2023/03/17","T","00101","10");
+        AcopioLecheEntity acopioLecheEntity1 = new AcopioLecheEntity("2023/03/18","M","00101","20");
+        AcopioLecheEntity acopioLecheEntity2 = new AcopioLecheEntity("2023/03/19","M","00101","30");
+        AcopioLecheEntity acopioLecheEntity3 = new AcopioLecheEntity("2023/03/20","T","00101","40");
+        listAcopioLecheEntity = new ArrayList<>();
+        listAcopioLecheEntity.add(acopioLecheEntity);
+        listAcopioLecheEntity.add(acopioLecheEntity1);
+        listAcopioLecheEntity.add(acopioLecheEntity2);
+        listAcopioLecheEntity.add(acopioLecheEntity3);
+        int descuento = quincenasService.descuentoVariacionLeche(listAcopioLecheEntity);
+        assertThat(descuento).isEqualTo(0);
+    }
+    @Test
     void descuentoVariacionLeche_noHayVariacion() {
         AcopioLecheEntity acopioLecheEntity = new AcopioLecheEntity("2023/03/17","T","00101","10");
         AcopioLecheEntity acopioLecheEntity1 = new AcopioLecheEntity("2023/03/18","M","00101","20");
@@ -626,6 +683,12 @@ class QuincenasServiceTest {
     }
 
     @Test
+    void descuentoVariacionGrasa_noExiste() {
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
+        int descuento = quincenasService.descuentoVariacionGrasa(grasaSolidoTotalEntity);
+        assertThat(descuento).isEqualTo(0);
+    }
+    @Test
     void descuentoVariacionGrasa_NoHayVariacion() {
         grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
         quincenasEntity = new QuincenasEntity(176,11,22,"00101");
@@ -671,6 +734,12 @@ class QuincenasServiceTest {
         quincenasRepository.delete(quincenasEntity);
     }
 
+    @Test
+    void descuentoVariacionSolidoTotal_noExiste() {
+        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
+        int descuento = quincenasService.descuentoVariacionSolidoTotal(grasaSolidoTotalEntity);
+        assertThat(descuento).isEqualTo(0);
+    }
     @Test
     void descuentoVariacionSolidoTotal_noHayVariacion() {
         grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
@@ -813,10 +882,8 @@ class QuincenasServiceTest {
         grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
         quincenasEntity = new QuincenasEntity(124,37,22,"00101");
         quincenasRepository.save(quincenasEntity);
-        int pago = quincenasService.pagoAcopioLeche(grasaSolidoTotalEntity, proveedorEntity, listAcopioLecheEntity);
-        int descuento = quincenasService.descuentos(listAcopioLecheEntity, grasaSolidoTotalEntity, proveedorEntity);
 
-        int pagoTotal=pago-descuento;
+        int pagoTotal=quincenasService.pagoTotal(grasaSolidoTotalEntity,proveedorEntity,listAcopioLecheEntity);
         assertThat(pagoTotal).isEqualTo(86500);
 
         quincenasRepository.delete(quincenasEntity);
@@ -837,13 +904,8 @@ class QuincenasServiceTest {
         grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
         quincenasEntity = new QuincenasEntity(124,37,22,"00101");
         quincenasRepository.save(quincenasEntity);
-        int pago = quincenasService.pagoAcopioLeche(grasaSolidoTotalEntity, proveedorEntity, listAcopioLecheEntity);
-        int descuento = quincenasService.descuentos(listAcopioLecheEntity, grasaSolidoTotalEntity, proveedorEntity);
-
-        int pagoTotal=pago-descuento;
-        int retencion = quincenasService.retencion(pagoTotal);
-        pagoTotal = pagoTotal - retencion;
-        assertThat(pagoTotal).isEqualTo(86500);
+        int pagoFinal = quincenasService.pagoFinal(grasaSolidoTotalEntity, proveedorEntity, listAcopioLecheEntity);
+        assertThat(pagoFinal).isEqualTo(86500);
 
         quincenasRepository.delete(quincenasEntity);
     }
@@ -862,13 +924,8 @@ class QuincenasServiceTest {
         grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
         quincenasEntity = new QuincenasEntity(1080,37,22,"00101");
         quincenasRepository.save(quincenasEntity);
-        int pago = quincenasService.pagoAcopioLeche(grasaSolidoTotalEntity, proveedorEntity, listAcopioLecheEntity);
-        int descuento = quincenasService.descuentos(listAcopioLecheEntity, grasaSolidoTotalEntity, proveedorEntity);
-
-        int pagoTotal=pago-descuento;
-        int retencion = quincenasService.retencion(pagoTotal);
-        pagoTotal = pagoTotal - retencion;
-        assertThat(pagoTotal).isEqualTo(874698);
+        int pagoFinal = quincenasService.pagoFinal(grasaSolidoTotalEntity, proveedorEntity, listAcopioLecheEntity);
+        assertThat(pagoFinal).isEqualTo(874698);
 
         quincenasRepository.delete(quincenasEntity);
     }

@@ -31,7 +31,6 @@ public class GrasaSolidoTotalController {
     public String upload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
         System.out.println("File: " + file.getOriginalFilename());
         if(!Objects.equals(file.getOriginalFilename(), "")){
-            subirData.guardarGrasaSolidoTotal(file);
             redirectAttributes.addFlashAttribute("mensaje", "¡Archivo cargado correctamente!");
             subirData.leerCSV(file.getOriginalFilename());
         }

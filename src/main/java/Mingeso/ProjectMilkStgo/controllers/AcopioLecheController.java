@@ -30,7 +30,6 @@ public class AcopioLecheController {
     @PostMapping("/subir_acopioLeche")
     public String upload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
         if(!Objects.equals(file.getOriginalFilename(), "")){
-            subirData.guardarAcopioLeche(file);
             redirectAttributes.addFlashAttribute("mensaje", "¡Archivo cargado correctamente!");
             subirData.leerCSV(file.getOriginalFilename());
         }
