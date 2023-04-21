@@ -1,0 +1,47 @@
+CREAR UN VOLUMEN PARA PERSISTENCIA DE DATOS
+
+---------- VOLUME ---------------
+
+docker volume prune -> Limpia los volumenes que se hayan creado anteriormente
+
+docker volume ls -> Muestra los volumenes existentes
+
+docker volume create <Nombre> -> Crea un volume donde <Nombre> será el nombre necesario para más adelante
+	- Nombre: MilkStgo
+	=> docker volume create MilkStgo
+
+
+----------- IMAGEN ---------------
+
+docker build -t <Nombre Usuario de docker>/<Nombre Repositorio> . -> Se crea la imagen de nuestro proyecto de manera local
+	- Nombre de Usuario de docker: simonsaez
+	- Nombre Repositorio: project-milkstgo
+	=> docker build -t simonsaez/project-milkstgo .
+
+docker push <nombre_usuario>/<nombre_repositorio> -> Para subir la capas de la imagen a docker
+	- Nombre de Usuario de docker: simonsaez
+	- Nombre Repositorio: project-milkstgo
+	=> docker push simonsaez/project-milkstgo
+
+docker image ls -> Se ven las imagenes creadas
+
+docker rmi <Nombre de la imagen> -> Eliminar la imagen
+	- Nombre de la imagen: simonsaez/project-milkstgo
+	=> docker rmi simonsaez/project-milkstgo
+
+
+----------- DOCKER COMPOSE --------------------
+
+docker-compose up -> Crea y levanta el contenedor
+
+docker ps -> Muestra los contenedores
+
+docker rm -f <Nombre Contenedor> -> Elimina el contenedor
+	- Nombre Contenedor: project-milkstgo
+	=> docker rm -f project-milkstgo
+
+docker-compose down -> Detiene la ejecución del docker compose... CTRL + C también lo detiene
+
+
+----------- SONARQUBE --------------------------
+mvn clean verify sonar:sonar -Dsonar.projectKey=Project-MilkStgo -Dsonar.projectName='Project-MilkStgo' -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_915d98b55653607e0d4098c924ced901d1747677

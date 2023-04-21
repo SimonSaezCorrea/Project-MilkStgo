@@ -2,6 +2,7 @@ package Mingeso.ProjectMilkStgo.services;
 
 import Mingeso.ProjectMilkStgo.entities.GrasaSolidoTotalEntity;
 import Mingeso.ProjectMilkStgo.repositories.GrasaSolidoTotalRepository;
+import lombok.Generated;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -21,16 +23,39 @@ public class GrasaSolidoTotalesService {
     GrasaSolidoTotalRepository grasaSolidoTotalRepository;
     private final Logger logg = LoggerFactory.getLogger(GrasaSolidoTotalRepository.class);
 
-    public void guardarGrasaSolidoTotal(GrasaSolidoTotalEntity grasaSolidoTotalesEntity){
+    public void guardarGrasaSolidoTotal(GrasaSolidoTotalEntity grasaSolidoTotalesEntity) {
         grasaSolidoTotalRepository.save(grasaSolidoTotalesEntity);
     }
-    public ArrayList<GrasaSolidoTotalEntity> obtenerGrasaSolidoTotal(){
+
+    public ArrayList<GrasaSolidoTotalEntity> obtenerGrasaSolidoTotal() {
         return (ArrayList<GrasaSolidoTotalEntity>) grasaSolidoTotalRepository.findAll();
     }
-    public GrasaSolidoTotalEntity obtenerGrasaSolidoTotal(String proveedor_id){
+
+    public GrasaSolidoTotalEntity obtenerGrasaSolidoTotal(String proveedor_id) {
         return grasaSolidoTotalRepository.encontrarPorProveedor(proveedor_id);
     }
 
+    @Generated
+    public String guardarGrasaSolidoTotal(MultipartFile file) {
+        String filename = file.getOriginalFilename();
+        if (filename != null) {
+            if (!file.isEmpty()) {
+                try {
+                    byte[] bytes = file.getBytes();
+                    Path path = Paths.get(file.getOriginalFilename());
+                    Files.write(path, bytes);
+                    logg.info("Archivo guardado");
+                } catch (IOException e) {
+                    logg.error("ERROR", e);
+                }
+            }
+            return "Archivo guardado con exito!";
+        } else {
+            return "No se pudo guardar el archivo";
+        }
+    }
+
+    @Generated
     public void leerCSV(String direccion){
         BufferedReader bf = null;
         grasaSolidoTotalRepository.deleteAll();

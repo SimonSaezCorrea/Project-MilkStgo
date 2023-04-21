@@ -1,4 +1,4 @@
-package Mingeso.ProjectMilkStgo.services;
+package Mingeso.ProjectMilkStgo;
 
 
 import Mingeso.ProjectMilkStgo.entities.ProveedorEntity;

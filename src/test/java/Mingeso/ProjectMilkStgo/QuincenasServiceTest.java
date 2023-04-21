@@ -1,4 +1,4 @@
-package Mingeso.ProjectMilkStgo.services;
+package Mingeso.ProjectMilkStgo;
 
 import Mingeso.ProjectMilkStgo.entities.AcopioLecheEntity;
 import Mingeso.ProjectMilkStgo.entities.GrasaSolidoTotalEntity;
@@ -8,6 +8,7 @@ import Mingeso.ProjectMilkStgo.repositories.AcopioLecheRepository;
 import Mingeso.ProjectMilkStgo.repositories.GrasaSolidoTotalRepository;
 import Mingeso.ProjectMilkStgo.repositories.ProveedorRepository;
 import Mingeso.ProjectMilkStgo.repositories.QuincenasRepository;
+import Mingeso.ProjectMilkStgo.services.QuincenasService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

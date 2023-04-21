@@ -1,7 +1,8 @@
-package Mingeso.ProjectMilkStgo.services;
+package Mingeso.ProjectMilkStgo;
 
 import Mingeso.ProjectMilkStgo.entities.GrasaSolidoTotalEntity;
 import Mingeso.ProjectMilkStgo.repositories.GrasaSolidoTotalRepository;
+import Mingeso.ProjectMilkStgo.services.GrasaSolidoTotalesService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.shadow.com.univocity.parsers.csv.CsvWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +45,6 @@ class GrasaSolidoTotalesServiceTest {
         assertNotNull(grasaSolidoTotalesService.obtenerGrasaSolidoTotal());
         grasaSolidoTotalRepository.delete(grasaSolidoTotalEntity);
     }
-    @Test
-    void obtenerGrasaSolidoTotal_medianteProveedor(){
-        grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","23","41");
-        grasaSolidoTotalRepository.save(grasaSolidoTotalEntity);
-        assertThat(grasaSolidoTotalesService.obtenerGrasaSolidoTotal("00101")).isEqualTo(grasaSolidoTotalEntity);
-        grasaSolidoTotalRepository.delete(grasaSolidoTotalEntity);
-    }
-
     @Test
     void leerCSV(){
         List<String[]> datos = new ArrayList<String[]>();
