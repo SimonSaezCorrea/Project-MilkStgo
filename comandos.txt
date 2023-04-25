@@ -45,3 +45,15 @@ docker-compose down -> Detiene la ejecución del docker compose... CTRL + C tamb
 
 ----------- SONARQUBE --------------------------
 mvn clean verify sonar:sonar -Dsonar.projectKey=Project-MilkStgo -Dsonar.projectName='Project-MilkStgo' -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_915d98b55653607e0d4098c924ced901d1747677
+
+Identificación:
+	User: admin
+	Pass: Simon_789
+
+---------- JENKINS -------------------
+
+java -jar jenkins.war
+
+Identificacion:
+	User: simon
+	Pass: Simon_789

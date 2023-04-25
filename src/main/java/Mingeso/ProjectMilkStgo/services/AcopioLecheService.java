@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class AcopioLecheService {
     @Autowired
     private AcopioLecheRepository acopioLecheRepository;
-    private final Logger logg = LoggerFactory.getLogger(AcopioLecheService.class);
+    private final Logger logg = LoggerFactory.getLogger(AcopioLecheRepository.class);
 
     public void guardarAcopioLeche(AcopioLecheEntity acopioLeche){
         acopioLecheRepository.save(acopioLeche);
@@ -49,7 +49,6 @@ public class AcopioLecheService {
             return "No se pudo guardar el archivo";
         }
     }
-    @Generated
     public void leerCSV(String direccion){
         BufferedReader bf = null;
         acopioLecheRepository.deleteAll();
