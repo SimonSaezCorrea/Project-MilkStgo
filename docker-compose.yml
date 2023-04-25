@@ -9,9 +9,9 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
-      - app1
-      - app2
-      - app3
+      - milkstgo1
+      - milkstgo2
+      - milkstgo3
 
   postgres-db:
     image: postgres:latest
