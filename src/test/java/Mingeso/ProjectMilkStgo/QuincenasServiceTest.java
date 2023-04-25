@@ -139,7 +139,7 @@ class QuincenasServiceTest {
         listAcopioLecheEntity.add(acopioLecheEntity3);
         proveedorEntity = new ProveedorEntity("00101","Anonimo","M","Si");
         int sueldo = quincenasService.sueldoCategoria(listAcopioLecheEntity, proveedorEntity);
-        assertThat(sueldo).isEqualTo(0);
+        assertThat(sueldo).isZero();
     }
 
     @Test
@@ -575,7 +575,7 @@ class QuincenasServiceTest {
 
         int bonificacion = quincenasService.bonificacionFrecuencia(listAcopioLecheEntity);
 
-        assertThat(bonificacion).isEqualTo(0);
+        assertThat(bonificacion).isZero();
     }
 
     @Test
@@ -590,7 +590,7 @@ class QuincenasServiceTest {
         listAcopioLecheEntity.add(acopioLecheEntity2);
         listAcopioLecheEntity.add(acopioLecheEntity3);
         int descuento = quincenasService.descuentoVariacionLeche(listAcopioLecheEntity);
-        assertThat(descuento).isEqualTo(0);
+        assertThat(descuento).isZero();
     }
     @Test
     void descuentoVariacionLeche_noHayVariacion() {
@@ -607,7 +607,7 @@ class QuincenasServiceTest {
         quincenasEntity = new QuincenasEntity(80,11,22,"00101");
         quincenasRepository.save(quincenasEntity);
         int descuento = quincenasService.descuentoVariacionLeche(listAcopioLecheEntity);
-        assertThat(descuento).isEqualTo(0);
+        assertThat(descuento).isZero();
         quincenasRepository.delete(quincenasEntity);
     }
     @Test
@@ -625,7 +625,7 @@ class QuincenasServiceTest {
         quincenasEntity = new QuincenasEntity(105,11,22,"00101");
         quincenasRepository.save(quincenasEntity);
         int descuento = quincenasService.descuentoVariacionLeche(listAcopioLecheEntity);
-        assertThat(descuento).isEqualTo(0);
+        assertThat(descuento).isZero();
         quincenasRepository.delete(quincenasEntity);
     }
     @Test
@@ -687,7 +687,7 @@ class QuincenasServiceTest {
     void descuentoVariacionGrasa_noExiste() {
         grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
         int descuento = quincenasService.descuentoVariacionGrasa(grasaSolidoTotalEntity);
-        assertThat(descuento).isEqualTo(0);
+        assertThat(descuento).isZero();
     }
     @Test
     void descuentoVariacionGrasa_NoHayVariacion() {
@@ -695,7 +695,7 @@ class QuincenasServiceTest {
         quincenasEntity = new QuincenasEntity(176,11,22,"00101");
         quincenasRepository.save(quincenasEntity);
         int descuento = quincenasService.descuentoVariacionGrasa(grasaSolidoTotalEntity);
-        assertThat(descuento).isEqualTo(0);
+        assertThat(descuento).isZero();
         quincenasRepository.delete(quincenasEntity);
     }
     @Test
@@ -704,7 +704,7 @@ class QuincenasServiceTest {
         quincenasEntity = new QuincenasEntity(176,26,22,"00101");
         quincenasRepository.save(quincenasEntity);
         int descuento = quincenasService.descuentoVariacionGrasa(grasaSolidoTotalEntity);
-        assertThat(descuento).isEqualTo(0);
+        assertThat(descuento).isZero();
         quincenasRepository.delete(quincenasEntity);
     }
     @Test
@@ -739,7 +739,7 @@ class QuincenasServiceTest {
     void descuentoVariacionSolidoTotal_noExiste() {
         grasaSolidoTotalEntity = new GrasaSolidoTotalEntity("00101","25","45");
         int descuento = quincenasService.descuentoVariacionSolidoTotal(grasaSolidoTotalEntity);
-        assertThat(descuento).isEqualTo(0);
+        assertThat(descuento).isZero();
     }
     @Test
     void descuentoVariacionSolidoTotal_noHayVariacion() {
@@ -747,7 +747,7 @@ class QuincenasServiceTest {
         quincenasEntity = new QuincenasEntity(176,37,22,"00101");
         quincenasRepository.save(quincenasEntity);
         int descuento = quincenasService.descuentoVariacionSolidoTotal(grasaSolidoTotalEntity);
-        assertThat(descuento).isEqualTo(0);
+        assertThat(descuento).isZero();
         quincenasRepository.delete(quincenasEntity);
     }
     @Test
@@ -756,7 +756,7 @@ class QuincenasServiceTest {
         quincenasEntity = new QuincenasEntity(176,37,47,"00101");
         quincenasRepository.save(quincenasEntity);
         int descuento = quincenasService.descuentoVariacionSolidoTotal(grasaSolidoTotalEntity);
-        assertThat(descuento).isEqualTo(0);
+        assertThat(descuento).isZero();
         quincenasRepository.delete(quincenasEntity);
     }
     @Test
@@ -797,7 +797,7 @@ class QuincenasServiceTest {
     void Noretencion() {
         int pago = 600000;
         int retencion = quincenasService.retencion(pago);
-        assertThat(retencion).isEqualTo(0);
+        assertThat(retencion).isZero();
     }
 
     @Test

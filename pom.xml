@@ -18,7 +18,8 @@
 		<sonar.exclusions>
 			src/main/java/Mingeso/ProjectMilkStgo/controllers/*,
 			src/main/java/Mingeso/ProjectMilkStgo/entities/*,
-			src/main/java/Mingeso/ProjectMilkStgo/repositories/*
+			src/main/java/Mingeso/ProjectMilkStgo/repositories/*,
+			src/main/java/Mingeso/ProjectMilkStgo/ProjectMilkStgoApplication.java
 		</sonar.exclusions>
 	</properties>
 	<dependencies>

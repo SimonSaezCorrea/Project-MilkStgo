@@ -5,10 +5,10 @@ import Mingeso.ProjectMilkStgo.entities.GrasaSolidoTotalEntity;
 import Mingeso.ProjectMilkStgo.entities.ProveedorEntity;
 import Mingeso.ProjectMilkStgo.entities.QuincenasEntity;
 import Mingeso.ProjectMilkStgo.repositories.QuincenasRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -70,7 +70,9 @@ public class QuincenasService {
 
     public int bonificacionFrecuencia(List<AcopioLecheEntity> listAcopioLecheEntity) {
         int contador = 0;
-        boolean diaDoble = true, continuidad=true, esManiana=false;
+        boolean diaDoble = true;
+        boolean continuidad=true;
+        boolean esManiana=false;
         for (int i = 0; i < listAcopioLecheEntity.size()-1; i++) {
             contador++;
            if(listAcopioLecheEntity.get(i).getTurno().equals("M") && !esManiana && !continuidad){
@@ -219,8 +221,8 @@ public class QuincenasService {
 
     public int pagoFinal(GrasaSolidoTotalEntity grasaSolidoTotalesEntity,
                          ProveedorEntity proveedorEntity,
-                         List<AcopioLecheEntity> ListAcopioLecheEntiti){
-        int pago = pagoTotal(grasaSolidoTotalesEntity, proveedorEntity, ListAcopioLecheEntiti);
+                         List<AcopioLecheEntity> listAcopioLecheEntity){
+        int pago = pagoTotal(grasaSolidoTotalesEntity, proveedorEntity, listAcopioLecheEntity);
         int retencion = retencion(pago);
         return pago - retencion;
     }
