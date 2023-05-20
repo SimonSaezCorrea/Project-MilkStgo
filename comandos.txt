@@ -57,3 +57,72 @@ java -jar jenkins.war
 Identificacion:
 	User: simon
 	Pass: Simon_789
+
+--------- AWS -------------------
+
+export AWS_ACCESS_KEY_ID=AKIAULPFJ5PLEOYMCZUP
+
+export AWS_SECRET_ACCESS_KEY=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
+
+terraform apply
+
+chmod 400 key.pem
+
+ssh -i key.pem ec2-user@(IP4 PUBLICA)
+
+sudo yum update
+
+sudo yum install docker
+
+sudo usermod -a -G docker ec2-user
+
+id ec2-user
+
+newgrp docker
+
+wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) 
+
+sudo mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
+
+sudo chmod -v +x /usr/local/bin/docker-compose
+
+sudo systemctl enable docker.service
+
+sudo systemctl start docker.service
+
+sudo systemctl status docker.service
+
+vi docker-compose.yml
+
+-> Se apreta la tecla 'a'
+-> Se copia el contenido del archivo "docker-compose.yml"
+-> Se apreta la tecla 'esc'
+-> Se escribe ":wq"
+
+mkdir nginx
+
+cd nginx
+
+mkdir conf.d
+
+cd conf.d
+
+vi project-milkstgo.conf
+
+
+-> Se apreta la tecla 'a'
+-> Se copia el contenido del archivo "milkstgo.conf"
+-> Se apreta la tecla 'esc'
+-> Se escribe ":wq"
+
+cd
+
+docker-compose --compatibility up
+
+-> Para bajar docker
+
+docker-compose down
+
+exit
+
+terraform destroy
